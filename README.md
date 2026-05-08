@@ -30,6 +30,18 @@ Zatrzymanie:
 docker compose down
 ```
 
+### Komendy developerskie (w kontenerze)
+
+Jeśli nie masz lokalnie Node/pnpm, uruchamiaj komendy przez serwis `web`:
+
+```powershell
+# lint
+docker compose exec -T web pnpm lint
+
+# build (stabilny: skrypt ustawia NODE_ENV=production)
+docker compose exec -T web pnpm build
+```
+
 ### Prod (zbudowany obraz)
 
 ```powershell

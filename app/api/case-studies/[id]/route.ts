@@ -13,18 +13,27 @@ import rehypeStringify from "rehype-stringify"
 
 const CASE_STUDIES_DIR = path.join(process.cwd(), "content", "case-studies")
 
+function getFrontmatterId(data: unknown): string | null {
+  if (!data || typeof data !== "object") return null
+  const id = (data as Record<string, unknown>).id
+  return typeof id === "string" ? id : null
+}
+
 function findCaseStudyFileById(id: string): string | null {
   const files = fs.readdirSync(CASE_STUDIES_DIR).filter((f: string) => f.endsWith(".mdx"))
   for (const f of files) {
     const full = path.join(CASE_STUDIES_DIR, f)
     const raw = fs.readFileSync(full, "utf8")
     const { data } = matter(raw)
-    if ((data as any)?.id === id) return full
+    if (getFrontmatterId(data) === id) return full
   }
   return null
 }
 
-export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(
+  _: Request,
+  { params }: { params: { id: string } | Promise<{ id: string }> },
+) {
   const { id } = await params
   const filePath = findCaseStudyFileById(id)
   if (!filePath) {
@@ -35,20 +44,23 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
   const { content } = matter(raw)
 
   // Keep this intentionally conservative: allow basic formatting only.
+  const baseAttributes = defaultSchema.attributes ?? {}
+  const linkAttributes = ("a" in baseAttributes ? baseAttributes.a : undefined) ?? []
+
   const schema = {
     ...defaultSchema,
     attributes: {
-      ...defaultSchema.attributes,
-      a: [...((defaultSchema.attributes as any)?.a ?? []), ["target"], ["rel"]],
+      ...baseAttributes,
+      a: [...linkAttributes, ["target"], ["rel"]],
     },
-  }
+  } as typeof defaultSchema
 
   const file = await unified()
     .use(remarkParse)
     .use(remarkMdx) // allows MDX syntax; we still sanitize in HTML output
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: false })
-    .use(rehypeSanitize as any, schema as any)
+    .use(rehypeSanitize, schema)
     .use(rehypeStringify)
     .process(content)
 
