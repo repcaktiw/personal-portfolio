@@ -22,9 +22,9 @@ export function Footer({ socialLinks, className, availabilityLabel }: FooterProp
               <div className="w-8 h-8 rounded bg-accent/20 border border-accent/30 flex items-center justify-center">
                 <GlobeIcon className="w-4 h-4 text-accent" aria-hidden="true" />
               </div>
-              <span className="font-semibold tracking-tight">Kacper Witkowski</span>
+              <span className="ui-brand">Kacper Witkowski</span>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="ui-body-sm">
               &copy; {currentYear} All rights reserved.
             </p>
           </div>
@@ -48,7 +48,7 @@ export function Footer({ socialLinks, className, availabilityLabel }: FooterProp
           )}
 
           {/* Status */}
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 ui-body-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-500 pulse-dot" />
             {availabilityLabel ?? "Available for projects"}
           </div>

@@ -41,17 +41,17 @@ export default function PortfolioPage() {
 
           {/* Text */}
           <div className="max-w-4xl animate-fade-in">
-            <div className="inline-flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-muted-foreground mb-8">
+            <div className="ui-kicker ui-kicker-muted mb-8">
               <span className="w-2 h-2 rounded-full bg-accent pulse-dot" />
               {hero.name}
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1]">
+            <h1 className="ui-h1">
               {hero.headingLine1}
               <span className="block text-gradient">{hero.headingLine2}</span>
             </h1>
 
-            <p className="mt-8 text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
+            <p className="mt-8 ui-lead max-w-xl">
               {hero.tagline}
             </p>
 
@@ -94,7 +94,7 @@ export default function PortfolioPage() {
               label={about.sectionLabel}
               title={about.title}
             />
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <div className="space-y-4 ui-body">
               {about.paragraphs.map((p) => (
                 <p key={p}>{p}</p>
               ))}
@@ -161,14 +161,14 @@ export default function PortfolioPage() {
       <Section id="contact" withGrid className="py-14 md:py-16 lg:py-20">
         <div className="max-w-2xl mx-auto text-center">
           <div className="mb-8 md:mb-10 text-center">
-            <span className="inline-flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest text-accent mb-3">
+              <span className="ui-kicker ui-kicker-accent justify-center mb-3">
               <span className="w-2 h-2 rounded-full bg-accent pulse-dot" />
               {contact.sectionLabel}
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-balance leading-tight">
+            <h2 className="ui-h2-compact">
               {contact.title}
             </h2>
-            <p className="mt-3 text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed mx-auto">
+            <p className="mt-3 ui-sublead max-w-2xl mx-auto">
               {contact.description}
             </p>
           </div>
@@ -188,7 +188,7 @@ export default function PortfolioPage() {
             </a>
           </div>
           
-          <p className="mt-6 text-sm text-muted-foreground font-mono">
+          <p className="mt-6 ui-mono-sm">
             {contact.email}
           </p>
         </div>

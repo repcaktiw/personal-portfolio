@@ -44,7 +44,7 @@ export function Navigation({ items, logo }: NavigationProps) {
                 <div className="w-8 h-8 rounded bg-accent/20 border border-accent/30 flex items-center justify-center">
                   <GlobeIcon className="w-4 h-4 text-accent" aria-hidden="true" />
                 </div>
-                <span className="font-semibold tracking-tight hidden sm:block">Kacper Witkowski</span>
+                <span className="ui-brand hidden sm:block">Kacper Witkowski</span>
               </div>
             )}
           </a>
@@ -55,7 +55,7 @@ export function Navigation({ items, logo }: NavigationProps) {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-foreground animated-underline transition-smooth"
+                className="ui-navlink animated-underline"
               >
                 {item.label}
               </a>
@@ -106,7 +106,7 @@ export function Navigation({ items, logo }: NavigationProps) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-sm text-muted-foreground hover:text-foreground transition-smooth"
+                className="ui-navlink"
               >
                 {item.label}
               </a>

@@ -21,14 +21,18 @@ export function DomainCard({ icon, title, description, keywords, className }: Do
         {icon}
       </div>
 
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
+      <h3 className="ui-h3 mb-2">{title}</h3>
+      <p className="ui-body-sm">{description}</p>
       {!!keywords?.length && (
-        <div className="mt-3 text-xs text-muted-foreground/90 font-mono">
+        <div className="mt-3 flex flex-wrap items-center text-[11px] leading-relaxed text-muted-foreground/80">
           {keywords.map((k, idx) => (
-            <span key={`${k}-${idx}`}>
-              {k}
-              {idx < keywords.length - 1 ? " · " : ""}
+            <span key={`${k}-${idx}`} className="inline-flex items-center">
+              <span className="font-mono">{k}</span>
+              {idx < keywords.length - 1 && (
+                <span className="mx-2 text-muted-foreground/40" aria-hidden="true">
+                  ·
+                </span>
+              )}
             </span>
           ))}
         </div>

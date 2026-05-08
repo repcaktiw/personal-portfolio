@@ -44,11 +44,11 @@ export function TechCard({
         </div>
       )}
 
-      <h3 className="text-lg font-semibold tracking-tight mb-2 transition-smooth group-hover:text-accent">
+      <h3 className="ui-h3 mb-2 transition-smooth group-hover:text-accent">
         {title}
       </h3>
 
-      <p className="text-muted-foreground text-sm leading-relaxed flex-grow">
+      <p className="ui-body-sm flex-grow">
         {description}
       </p>
 
@@ -57,7 +57,7 @@ export function TechCard({
           {tags.map((tag) => (
             <span 
               key={tag}
-              className="px-2 py-1 text-xs font-mono bg-secondary/50 text-muted-foreground rounded"
+              className="ui-tag"
             >
               {tag}
             </span>
@@ -83,7 +83,7 @@ export function StatCard({ value, label, className }: StatCardProps) {
       <div className="text-3xl md:text-4xl font-semibold text-gradient mb-2">
         {value}
       </div>
-      <div className="text-sm text-muted-foreground font-mono uppercase tracking-wider">
+      <div className="ui-kicker ui-kicker-muted justify-center">
         {label}
       </div>
     </div>

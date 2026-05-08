@@ -134,17 +134,17 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
               
               {/* Category tag */}
               <div className="absolute top-4 left-4">
-                <span className="px-3 py-1.5 text-xs font-mono uppercase tracking-wider bg-accent/90 text-accent-foreground rounded">
+                <span className="ui-badge bg-accent/90 text-accent-foreground border-accent/30">
                   {study.category}
                 </span>
               </div>
 
               {/* Content overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-2 group-hover:text-gradient transition-smooth">
+                <h3 className="ui-h3-lg text-foreground mb-2 group-hover:text-gradient transition-smooth">
                   {study.title}
                 </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
+                <p className="ui-body-sm line-clamp-2">
                   {study.subtitle}
                 </p>
               </div>
@@ -179,10 +179,10 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
                 {/* Header */}
                 <div className="flex items-start justify-between gap-4 px-6 py-5 border-b border-border/60">
                   <div className="min-w-0">
-                    <Dialog.Title className="text-xl md:text-2xl font-semibold tracking-tight">
+                    <Dialog.Title className="ui-h3-lg">
                       {activeStudy.title}
                     </Dialog.Title>
-                    <Dialog.Description className="mt-1 text-sm text-muted-foreground">
+                    <Dialog.Description className="mt-1 ui-body-sm">
                       {activeStudy.subtitle}
                     </Dialog.Description>
                   </div>
@@ -214,7 +214,7 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1.5 text-xs font-mono uppercase tracking-wider bg-accent/90 text-accent-foreground rounded">
+                      <span className="ui-badge bg-accent/90 text-accent-foreground border-accent/30">
                         {activeStudy.category}
                       </span>
                     </div>
@@ -230,7 +230,7 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
                             key={g.label}
                             className="p-4 rounded-lg bg-card/40 border border-border/60"
                           >
-                            <div className="text-xs text-muted-foreground uppercase tracking-wider font-mono">
+                            <div className="ui-kicker ui-kicker-muted">
                               {g.label}
                             </div>
                             <div className="mt-2 text-sm md:text-base font-semibold text-accent leading-snug">
@@ -245,7 +245,7 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
                     {(isLoadingHtml || activeHtml) && (
                       <div className="mdx-content space-y-4">
                         {isLoadingHtml ? (
-                          <div className="text-sm text-muted-foreground font-mono">Ładowanie…</div>
+                          <div className="ui-kicker ui-kicker-muted">Ładowanie…</div>
                         ) : (
                           <div dangerouslySetInnerHTML={{ __html: activeHtml }} />
                         )}

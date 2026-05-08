@@ -66,7 +66,7 @@ export function ProjectCard({
 
         {/* Category badge */}
         <div className="absolute top-4 left-4">
-          <span className="px-2 py-1 text-xs font-mono uppercase tracking-wider bg-card/80 backdrop-blur-sm border border-border rounded">
+          <span className="ui-badge">
             {category}
           </span>
         </div>
@@ -75,7 +75,7 @@ export function ProjectCard({
         <div className="absolute top-4 right-4">
           <span
             className={cn(
-              "px-2 py-1 text-xs font-mono uppercase tracking-wider border rounded",
+              "ui-badge",
               statusColors[status]
             )}
           >
@@ -86,11 +86,11 @@ export function ProjectCard({
 
       {/* Content */}
       <div className={cn("flex flex-col p-6", featured && "md:w-1/2 md:justify-center")}>
-        <h3 className="text-xl font-semibold tracking-tight mb-2 transition-smooth group-hover:text-accent">
+        <h3 className="ui-h3-lg mb-2 transition-smooth group-hover:text-accent">
           {title}
         </h3>
 
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+        <p className="ui-body-sm mb-4">
           {description}
         </p>
 
@@ -99,8 +99,8 @@ export function ProjectCard({
           <div className="flex gap-6 mb-4 py-4 border-y border-border/50">
             {metrics.map((metric) => (
               <div key={metric.label}>
-                <div className="text-lg font-semibold text-accent">{metric.value}</div>
-                <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
+                <div className="ui-metric">{metric.value}</div>
+                <div className="ui-kicker ui-kicker-muted">
                   {metric.label}
                 </div>
               </div>
@@ -114,7 +114,7 @@ export function ProjectCard({
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-1 text-xs font-mono bg-secondary/50 text-muted-foreground rounded"
+                className="ui-tag"
               >
                 {tag}
               </span>

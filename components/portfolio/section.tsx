@@ -54,16 +54,16 @@ export function SectionHeader({
       className
     )}>
       {label && (
-        <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-accent mb-4">
+        <span className="ui-kicker ui-kicker-accent mb-4">
           <span className="w-2 h-2 rounded-full bg-accent pulse-dot" />
           {label}
         </span>
       )}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-balance leading-tight">
+      <h2 className="ui-h2">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed">
+        <p className="mt-4 ui-lead max-w-2xl">
           {description}
         </p>
       )}

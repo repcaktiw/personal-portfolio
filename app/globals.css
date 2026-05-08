@@ -64,8 +64,8 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Geist Mono', monospace;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -236,13 +236,87 @@
   opacity: 0;
 }
 
+@layer utilities {
+  .ui-h1 {
+    @apply text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.08];
+  }
+
+  .ui-h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-balance leading-tight;
+  }
+
+  .ui-h2-compact {
+    @apply text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-balance leading-tight;
+  }
+
+  .ui-h3 {
+    @apply text-lg font-semibold tracking-tight;
+  }
+
+  .ui-h3-lg {
+    @apply text-xl md:text-2xl font-semibold tracking-tight;
+  }
+
+  .ui-lead {
+    @apply text-lg md:text-xl text-muted-foreground leading-relaxed;
+  }
+
+  .ui-sublead {
+    @apply text-base md:text-lg text-muted-foreground leading-relaxed;
+  }
+
+  .ui-body {
+    @apply text-sm md:text-base text-muted-foreground leading-relaxed;
+  }
+
+  .ui-body-sm {
+    @apply text-sm text-muted-foreground leading-relaxed;
+  }
+
+  .ui-kicker {
+    @apply inline-flex items-center gap-2 font-mono uppercase tracking-[0.18em] text-[12px] leading-none;
+  }
+
+  .ui-kicker-muted {
+    @apply text-muted-foreground/80;
+  }
+
+  .ui-kicker-accent {
+    @apply text-accent;
+  }
+
+  .ui-badge {
+    @apply px-2.5 py-1 text-[11px] font-mono uppercase tracking-[0.16em] rounded border border-border bg-card/70 backdrop-blur-sm;
+  }
+
+  .ui-tag {
+    @apply px-2 py-1 text-[11px] font-mono bg-secondary/50 text-muted-foreground rounded;
+  }
+
+  .ui-navlink {
+    @apply text-sm text-muted-foreground hover:text-foreground transition-all duration-300 ease-out;
+  }
+
+  .ui-brand {
+    @apply font-semibold tracking-tight;
+  }
+
+  .ui-mono-sm {
+    @apply font-mono text-sm text-muted-foreground;
+  }
+
+  .ui-metric {
+    @apply text-lg font-semibold text-accent;
+  }
+}
+
 /* Minimal styling for sanitized MDX/Markdown content */
 .mdx-content :where(h2) {
-  @apply text-lg md:text-xl font-semibold tracking-tight mt-8 mb-3;
+  @apply text-xl md:text-2xl font-semibold tracking-tight mt-8 mb-3;
 }
 
 .mdx-content :where(h3) {
-  @apply text-base md:text-lg font-semibold tracking-tight mt-6 mb-2;
+  @apply text-lg md:text-xl font-semibold tracking-tight mt-6 mb-2;
 }
 
 .mdx-content :where(h2:first-child, h3:first-child) {
