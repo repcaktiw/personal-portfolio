@@ -101,10 +101,10 @@ export default function PortfolioPage() {
             </div>
           </div>
           
-          {/* Visual stats block */}
+          {/* Visual skills block */}
           <div className="lg:col-span-2">
             <div className="grid grid-cols-2 gap-4">
-              {about.stats.map((s) => (
+              {about.skills.map((s) => (
                 <div
                   key={s.label}
                   className="group relative p-5 rounded-lg bg-card/50 border border-border border-glow card-hover transition-smooth flex flex-col"

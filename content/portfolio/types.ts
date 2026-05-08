@@ -56,7 +56,7 @@ export type AboutContent = {
   sectionLabel: string
   title: string
   paragraphs: string[]
-  stats: { value: string; label: string }[]
+  skills: { value: string; label: string }[]
 }
 
 export type DomainsContent = {

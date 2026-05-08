@@ -8,7 +8,7 @@ export const about = {
     "Pracuję na styku GIS i inżynierii lądowej, doświadczenie inżynieryjne z analizą danych, cyfrowymi workflow oraz automatyzacją procesów.",  
     "Skupiam się na integracji informacji, optymalizacji workflow i praktycznych rozwiązaniach wspierających efektywną realizację projektów",
   ],
-  stats: [
+  skills: [
     { value: "GIS & Web Mapping", label: "Wizualizacja danych z różnych źródeł" },
     { value: "Modele 3D, CAD, BIM", label: "Przetwarzanie danych do modeli 3D" },
     { value: "Analiza danych", label: "Integracja danych projektowych i pomiarowych"},
