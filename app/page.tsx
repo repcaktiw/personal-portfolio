@@ -105,9 +105,16 @@ export default function PortfolioPage() {
           <div className="lg:col-span-2">
             <div className="grid grid-cols-2 gap-4">
               {about.stats.map((s) => (
-                <div key={s.label} className="p-5 rounded-lg bg-secondary/50 border border-border">
-                  <div className="text-3xl font-semibold font-mono text-accent">{s.value}</div>
-                  <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
+                <div
+                  key={s.label}
+                  className="group relative p-5 rounded-lg bg-card/50 border border-border border-glow card-hover transition-smooth flex flex-col"
+                >
+                  <div className="text-2xl font-semibold font-mono text-accent transition-smooth group-hover:text-gradient">
+                    {s.value}
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-auto leading-snug pt-2">{s.label}</div>
+
+                  <div className="absolute top-3 right-3 w-3 h-3 border-t border-r border-accent/40 rounded-tr opacity-0 group-hover:opacity-100 transition-smooth" />
                 </div>
               ))}
             </div>

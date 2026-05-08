@@ -7,7 +7,7 @@ export const domains = {
   items: [
     {
       iconKey: "FileChartLineIcon",
-      title: "GIS i Kartogafia internetowa",
+      title: "GIS i Kartografia internetowa",
       description:
         "Tworzenie i integracja danych przestrzennych, map internetowych oraz systemów wspierających analizę i wizualizację informacji geograficznej.",
       keywords: ["QGIS", "dane przestrzenne", "geowizualizacja", "mapserver"],
@@ -16,14 +16,14 @@ export const domains = {
       iconKey: "RulerIcon",
       title: "Geodezja i inżynieria lądowa",
       description:
-        "Pozyskiwanie i integracja danych przestrzennych, w środowisku map internetowych oraz rozwój systemów wspierających analizę i wizualizację informacji przestrzennej.",
+        "Pozyskiwanie i przetwarzanie danych pomiarowych, modelowanie 3D oraz obliczenia wspierające realizację i analizę projektów infrastrukturalnych.",
       keywords: ["modelowanie 3D", "dane pomiarowe", "geodezyjne opracowanie projektu", "pomiary 3D"],
       },
     {
       iconKey: "DroneIcon",
       title: "Fotogrametria",
       description:
-        "Pozyskiwanie i przetwarzanie danych fotogrametrycznych, tworzenie modeli terenu oraz integracja danych przestrzennych z środowiskami GIS i BIM.",
+        "Pomiary metodami fotogrametrycznymi, obliczenia i tworzenie modeli oraz integracja danych przestrzennych z środowiskami GIS i BIM.",
       keywords: ["fotogrametria", "modele terenu", "chmury punktów", "BSP"],
       },
     {
@@ -38,7 +38,7 @@ export const domains = {
       title: "Automatyzacja Procesów",
       description:
         "Projektowanie i wdrażanie automatyzacji wspierających przepływ informacji, raportowanie oraz codzienne procesy operacyjne.",
-      keywords: ["power automare", "ms365", "automatyzacja workflow", "python"],
+      keywords: ["power automate", "ms365", "automatyzacja workflow", "python"],
       },
     {
       iconKey: "WorkflowIcon",

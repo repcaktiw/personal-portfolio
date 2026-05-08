@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
 const inter = Inter({ 
@@ -16,9 +17,8 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Technical Engineer',
-  description: 'Technical engineer specializing in automation, GIS, data workflows and project coordination',
-  generator: 'v0.app',
+  title: 'Kacper Witkowski | GIS, BIM, Inżynieria lądowa, Automatyzacja',
+  description: 'Specjalizuję się w pracy z danymi przestrzennymi, automatyzacją oraz cyfrowymi narzędziami wspierającymi realizację projektów',
   icons: {
     icon: [
       {
@@ -50,9 +50,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark bg-background">
+    <html lang="pl" suppressHydrationWarning className="bg-background">
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          {children}
+        </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
