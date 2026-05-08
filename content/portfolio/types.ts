@@ -24,7 +24,7 @@ export type CaseStudy = {
   category: string
   image: string
   images?: string[]
-  metrics?: Metric[]
+  goals?: Metric[]
 }
 
 export type DomainIconKey =

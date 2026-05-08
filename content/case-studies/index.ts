@@ -3,8 +3,8 @@ import path from "path"
 import matter from "gray-matter"
 import type { CaseStudy } from "../portfolio/types"
 
-type CaseStudyFrontmatter = Omit<CaseStudy, "metrics"> & {
-  metrics?: { label: string; value: string }[]
+type CaseStudyFrontmatter = Omit<CaseStudy, "goals"> & {
+  goals?: { label: string; value: string }[]
   images?: string[]
 }
 

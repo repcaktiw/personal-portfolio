@@ -235,3 +235,44 @@
   animation: fade-in 0.5s ease-out 0.3s forwards;
   opacity: 0;
 }
+
+/* Minimal styling for sanitized MDX/Markdown content */
+.mdx-content :where(h2) {
+  @apply text-lg md:text-xl font-semibold tracking-tight mt-8 mb-3;
+}
+
+.mdx-content :where(h3) {
+  @apply text-base md:text-lg font-semibold tracking-tight mt-6 mb-2;
+}
+
+.mdx-content :where(h2:first-child, h3:first-child) {
+  margin-top: 0;
+}
+
+.mdx-content :where(p) {
+  @apply text-sm md:text-base text-muted-foreground leading-relaxed;
+}
+
+.mdx-content :where(ul) {
+  @apply list-disc pl-5 space-y-2;
+}
+
+.mdx-content :where(ol) {
+  @apply list-decimal pl-5 space-y-2;
+}
+
+.mdx-content :where(li) {
+  @apply text-sm md:text-base text-muted-foreground leading-relaxed;
+}
+
+.mdx-content :where(a) {
+  @apply text-accent hover:underline underline-offset-4;
+}
+
+.mdx-content :where(code) {
+  @apply font-mono text-[0.9em] text-foreground bg-secondary/40 border border-border/60 px-1.5 py-0.5 rounded;
+}
+
+.mdx-content :where(pre) {
+  @apply overflow-x-auto rounded-lg border border-border/60 bg-secondary/30 p-4;
+}

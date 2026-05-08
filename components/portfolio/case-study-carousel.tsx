@@ -1,8 +1,9 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { ImageSequence } from "./image-sequence"
+import * as Dialog from "@radix-ui/react-dialog"
 
 interface CaseStudy {
   id: string
@@ -11,7 +12,7 @@ interface CaseStudy {
   category: string
   image: string
   images?: string[]
-  metrics?: { label: string; value: string }[]
+  goals?: { label: string; value: string }[]
 }
 
 interface CaseStudyCarouselProps {
@@ -23,6 +24,29 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
+  const [activeId, setActiveId] = useState<string | null>(null)
+  const [activeHtml, setActiveHtml] = useState<string>("")
+  const [isLoadingHtml, setIsLoadingHtml] = useState(false)
+  const activeStudy = useMemo(
+    () => studies.find((s) => s.id === activeId) ?? null,
+    [activeId, studies]
+  )
+
+  const openStudy = async (id: string) => {
+    setActiveId(id)
+    setIsLoadingHtml(true)
+    setActiveHtml("")
+    try {
+      const res = await fetch(`/api/case-studies/${encodeURIComponent(id)}`, { cache: "no-store" })
+      if (!res.ok) throw new Error("Failed to load case study content")
+      const json = (await res.json()) as { html?: string }
+      setActiveHtml(json.html ?? "")
+    } catch {
+      setActiveHtml("")
+    } finally {
+      setIsLoadingHtml(false)
+    }
+  }
 
   const checkScroll = () => {
     if (!scrollRef.current) return
@@ -88,7 +112,12 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
             key={study.id}
             className="group relative flex-shrink-0 w-[85vw] md:w-[60vw] lg:w-[45vw] max-w-2xl snap-start"
           >
-            <div className="relative aspect-[16/10] rounded-lg overflow-hidden bg-secondary border border-border border-glow">
+            <button
+              type="button"
+              onClick={() => openStudy(study.id)}
+              className="relative aspect-[16/10] w-full rounded-lg overflow-hidden bg-secondary border border-border border-glow text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              aria-label={`Otwórz: ${study.title}`}
+            >
               {/* Visual placeholder - styled geometric pattern */}
               <div className="absolute inset-0 grid-pattern-dense opacity-30" />
               {study.images && study.images.length > 0 ? (
@@ -118,33 +147,11 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
                 <p className="text-sm text-muted-foreground line-clamp-2">
                   {study.subtitle}
                 </p>
-
-                {/* Goal / Outcome */}
-                {study.metrics && study.metrics.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-border/50 space-y-3">
-                    <div className="grid grid-cols-[4.5rem_1fr] gap-x-3">
-                      <div className="text-xs text-muted-foreground uppercase tracking-wider">
-                        Cel:
-                      </div>
-                      <div className="text-sm md:text-base font-semibold text-accent font-mono leading-snug">
-                        {study.metrics[0]?.value}
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-[4.5rem_1fr] gap-x-3">
-                      <div className="text-xs text-muted-foreground uppercase tracking-wider">
-                        Efekt:
-                      </div>
-                      <div className="text-sm md:text-base font-semibold text-accent font-mono leading-snug">
-                        {study.metrics[1]?.value}
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* Corner accent */}
               <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-accent/60 rounded-tr opacity-0 group-hover:opacity-100 transition-smooth" />
-            </div>
+            </button>
           </article>
         ))}
       </div>
@@ -153,6 +160,104 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
       <div className="mt-6 h-px bg-border relative overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-1/3 bg-accent/50 animate-pulse" />
       </div>
+
+      <Dialog.Root
+        open={!!activeStudy}
+        onOpenChange={(open: boolean) => {
+          if (!open) {
+            setActiveId(null)
+            setActiveHtml("")
+            setIsLoadingHtml(false)
+          }
+        }}
+      >
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 bg-background/70 backdrop-blur-sm z-50" />
+          <Dialog.Content className="fixed z-50 left-1/2 top-1/2 w-[min(94vw,60rem)] max-h-[88vh] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border bg-background shadow-xl overflow-hidden">
+            {activeStudy && (
+              <div className="flex flex-col max-h-[88vh]">
+                {/* Header */}
+                <div className="flex items-start justify-between gap-4 px-6 py-5 border-b border-border/60">
+                  <div className="min-w-0">
+                    <Dialog.Title className="text-xl md:text-2xl font-semibold tracking-tight">
+                      {activeStudy.title}
+                    </Dialog.Title>
+                    <Dialog.Description className="mt-1 text-sm text-muted-foreground">
+                      {activeStudy.subtitle}
+                    </Dialog.Description>
+                  </div>
+                  <Dialog.Close asChild>
+                    <button
+                      type="button"
+                      className="shrink-0 p-2 rounded border border-border bg-card/40 hover:bg-secondary transition-smooth"
+                      aria-label="Zamknij"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </Dialog.Close>
+                </div>
+
+                {/* Body */}
+                <div className="overflow-y-auto">
+                  {/* Image */}
+                  <div className="relative aspect-[16/9] bg-secondary border-b border-border/60">
+                    <div className="absolute inset-0 grid-pattern-dense opacity-25" />
+                    {activeStudy.images && activeStudy.images.length > 0 ? (
+                      <ImageSequence images={activeStudy.images} intervalMs={2600} crossfadeMs={900} />
+                    ) : (
+                      <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${activeStudy.image})` }}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1.5 text-xs font-mono uppercase tracking-wider bg-accent/90 text-accent-foreground rounded">
+                        {activeStudy.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="px-6 py-6 space-y-6">
+                    {/* Goals (Cel/Efekt) */}
+                    {activeStudy.goals && activeStudy.goals.length > 0 && (
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {activeStudy.goals.slice(0, 2).map((g: { label: string; value: string }) => (
+                          <div
+                            key={g.label}
+                            className="p-4 rounded-lg bg-card/40 border border-border/60"
+                          >
+                            <div className="text-xs text-muted-foreground uppercase tracking-wider font-mono">
+                              {g.label}
+                            </div>
+                            <div className="mt-2 text-sm md:text-base font-semibold text-accent leading-snug">
+                              {g.value}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* MDX body (compiled to sanitized HTML) */}
+                    {(isLoadingHtml || activeHtml) && (
+                      <div className="mdx-content space-y-4">
+                        {isLoadingHtml ? (
+                          <div className="text-sm text-muted-foreground font-mono">Ładowanie…</div>
+                        ) : (
+                          <div dangerouslySetInnerHTML={{ __html: activeHtml }} />
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </div>
   )
 }
