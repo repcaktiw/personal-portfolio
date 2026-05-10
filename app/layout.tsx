@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from '@/components/theme-provider'
+import { SITE_DOCUMENT_TITLE, SITE_METADATA_DESCRIPTION } from '@/content/site'
 import './globals.css'
 
 const geist = Geist({
@@ -17,8 +18,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Kacper Witkowski | GIS, BIM, Inżynieria lądowa, Automatyzacja',
-  description: 'Specjalizuję się w pracy z danymi przestrzennymi, automatyzacją oraz cyfrowymi narzędziami wspierającymi realizację projektów',
+  title: SITE_DOCUMENT_TITLE,
+  description: SITE_METADATA_DESCRIPTION,
   icons: {
     icon: [
       {

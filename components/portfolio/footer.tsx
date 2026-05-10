@@ -1,3 +1,4 @@
+import { SITE_AUTHOR_NAME } from "@/content/site"
 import { cn } from "@/lib/utils"
 import type { SocialLink } from "@/content/portfolio"
 import { socialIcons } from "./icon-map"
@@ -22,7 +23,7 @@ export function Footer({ socialLinks, className, availabilityLabel }: FooterProp
               <div className="w-8 h-8 rounded bg-accent/20 border border-accent/30 flex items-center justify-center">
                 <GlobeIcon className="w-4 h-4 text-accent" aria-hidden="true" />
               </div>
-              <span className="ui-brand">Kacper Witkowski</span>
+              <span className="ui-brand">{SITE_AUTHOR_NAME}</span>
             </div>
             <p className="ui-body-sm">
               &copy; {currentYear} All rights reserved.

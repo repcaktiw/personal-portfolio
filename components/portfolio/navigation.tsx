@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { GlobeIcon } from "lucide-react"
+import { SITE_AUTHOR_NAME } from "@/content/site"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
@@ -44,7 +45,7 @@ export function Navigation({ items, logo }: NavigationProps) {
                 <div className="w-8 h-8 rounded bg-accent/20 border border-accent/30 flex items-center justify-center">
                   <GlobeIcon className="w-4 h-4 text-accent" aria-hidden="true" />
                 </div>
-                <span className="ui-brand hidden sm:block">Kacper Witkowski</span>
+                <span className="ui-brand hidden sm:block">{SITE_AUTHOR_NAME}</span>
               </div>
             )}
           </a>

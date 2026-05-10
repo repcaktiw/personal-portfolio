@@ -1,7 +1,8 @@
+import { SITE_AUTHOR_NAME } from "@/content/site"
 import type { HeroContent } from "./types"
 
 export const hero = {
-  name: "Kacper Witkowski",
+  name: SITE_AUTHOR_NAME,
   headingLine1: "GIS · BIM · CAD",
   headingLine2: "Inżynieria lądowa · Automatyzacja procesów",
   tagline:
