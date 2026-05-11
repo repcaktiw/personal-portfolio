@@ -5,8 +5,9 @@ import { getCaseStudies } from "@/content/case-studies"
 export const dynamic = "force-dynamic"
 
 export default function Page() {
-  const { portfolio, site } = getContent("pl")
-  const studies = getCaseStudies("pl")
+  const { portfolio, site } = getContent("en")
+  const studies = getCaseStudies("en")
 
   return <PortfolioPage portfolio={portfolio} authorName={site.authorName} studies={studies} />
 }
+

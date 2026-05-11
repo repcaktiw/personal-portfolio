@@ -1,4 +1,4 @@
-export * from "./types"
+export * from "../../portfolio-types"
 export { navItems } from "./navigation"
 export { hero } from "./hero"
 export { about } from "./about"

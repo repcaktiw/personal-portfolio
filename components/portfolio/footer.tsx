@@ -1,16 +1,16 @@
-import { SITE_AUTHOR_NAME } from "@/content/site"
 import { cn } from "@/lib/utils"
-import type { SocialLink } from "@/content/portfolio"
+import type { SocialLink } from "@/content/portfolio-types"
 import { socialIcons } from "./icon-map"
 import { GlobeIcon } from "lucide-react"
 
 interface FooterProps {
+  authorName: string
   socialLinks?: SocialLink[]
   className?: string
   availabilityLabel?: string
 }
 
-export function Footer({ socialLinks, className, availabilityLabel }: FooterProps) {
+export function Footer({ authorName, socialLinks, className, availabilityLabel }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
   return (
@@ -23,7 +23,7 @@ export function Footer({ socialLinks, className, availabilityLabel }: FooterProp
               <div className="w-8 h-8 rounded bg-accent/20 border border-accent/30 flex items-center justify-center">
                 <GlobeIcon className="w-4 h-4 text-accent" aria-hidden="true" />
               </div>
-              <span className="ui-brand">{SITE_AUTHOR_NAME}</span>
+              <span className="ui-brand">{authorName}</span>
             </div>
             <p className="ui-body-sm">
               &copy; {currentYear} All rights reserved.
