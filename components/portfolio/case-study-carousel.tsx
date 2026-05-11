@@ -37,7 +37,8 @@ export function CaseStudyCarousel({ studies, className }: CaseStudyCarouselProps
     setIsLoadingHtml(true)
     setActiveHtml("")
     try {
-      const res = await fetch(`/api/case-studies/${encodeURIComponent(id)}`, { cache: "no-store" })
+      const locale = typeof window !== "undefined" && window.location.pathname.startsWith("/en") ? "en" : "pl"
+      const res = await fetch(`/api/case-studies/${encodeURIComponent(id)}?locale=${locale}`, { cache: "no-store" })
       if (!res.ok) throw new Error("Failed to load case study content")
       const json = (await res.json()) as { html?: string }
       setActiveHtml(json.html ?? "")
