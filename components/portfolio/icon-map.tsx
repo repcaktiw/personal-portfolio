@@ -1,4 +1,4 @@
-import type { DomainIconKey, SocialIconKey } from "@/content/portfolio"
+import type { DomainIconKey, SocialIconKey } from "@/content/portfolio-types"
 import type { LucideProps } from "lucide-react"
 import {
   ChartPieIcon,

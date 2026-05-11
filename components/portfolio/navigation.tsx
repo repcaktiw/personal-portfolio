@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { GlobeIcon } from "lucide-react"
-import { SITE_AUTHOR_NAME } from "@/content/site"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 interface NavItem {
@@ -13,11 +13,17 @@ interface NavItem {
 interface NavigationProps {
   items: NavItem[]
   logo?: React.ReactNode
+  authorName: string
 }
 
-export function Navigation({ items, logo }: NavigationProps) {
+export function Navigation({ items, logo, authorName }: NavigationProps) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname()
+
+  const isEn = pathname === "/en" || pathname.startsWith("/en/")
+  const langLabel = isEn ? "PL" : "EN"
+  const langHref = isEn ? (pathname.replace(/^\/en(\/|$)/, "/") || "/") : pathname === "/" ? "/en" : `/en${pathname}`
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +51,7 @@ export function Navigation({ items, logo }: NavigationProps) {
                 <div className="w-8 h-8 rounded bg-accent/20 border border-accent/30 flex items-center justify-center">
                   <GlobeIcon className="w-4 h-4 text-accent" aria-hidden="true" />
                 </div>
-                <span className="ui-brand hidden sm:block">{SITE_AUTHOR_NAME}</span>
+                <span className="ui-brand hidden sm:block">{authorName}</span>
               </div>
             )}
           </a>
@@ -61,6 +67,21 @@ export function Navigation({ items, logo }: NavigationProps) {
                 {item.label}
               </a>
             ))}
+
+            <a
+              href={langHref}
+              onClick={(e) => {
+                const hash = window.location.hash
+                if (hash) {
+                  e.preventDefault()
+                  window.location.href = `${langHref}${hash}`
+                }
+              }}
+              className="px-3 py-1.5 rounded border border-border text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-smooth"
+              aria-label={`Switch language to ${langLabel}`}
+            >
+              {langLabel}
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,6 +123,21 @@ export function Navigation({ items, logo }: NavigationProps) {
           )}
         >
           <div className="flex flex-col gap-4 pt-4 border-t border-border">
+            <a
+              href={langHref}
+              onClick={(e) => {
+                const hash = window.location.hash
+                if (hash) {
+                  e.preventDefault()
+                  window.location.href = `${langHref}${hash}`
+                }
+                setMobileOpen(false)
+              }}
+              className="ui-navlink"
+              aria-label={`Switch language to ${langLabel}`}
+            >
+              {langLabel}
+            </a>
             {items.map((item) => (
               <a
                 key={item.href}
