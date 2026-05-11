@@ -10,10 +10,11 @@ Portfolio / strona wizytówkowa zbudowana w **Next.js (App Router)** i **TypeScr
 
 ## Wymagania
 
-- **Docker Desktop** (zalecane) — repo ma gotową konfigurację Dockera, więc nie musisz instalować lokalnie Node/npm/pnpm.
+- **Docker Desktop** (zalecane) — repo ma gotową konfigurację Dockera, więc nie trzeba instalować lokalnie Node/npm/pnpm.
 
 ## Uruchomienie (Docker)
 
+Pamiętaj o uruchomieniu Docker Desktop
 W katalogu projektu:
 
 ### Dev (hot reload)
@@ -32,7 +33,7 @@ docker compose down
 
 ### Komendy developerskie (w kontenerze)
 
-Jeśli nie masz lokalnie Node/pnpm, uruchamiaj komendy przez serwis `web`:
+Jeśli nie masz lokalnie Node/pnpm, uruchom komendy przez serwis `web`:
 
 ```powershell
 # lint
@@ -59,14 +60,3 @@ Otwórz `http://localhost:3000`.
 
 - **`docker` is not recognized**: doinstaluj Docker Desktop i uruchom ponownie terminal.
 - **Port 3000 zajęty**: zatrzymaj proces lub zmień mapowanie w `docker-compose.yml` (np. `3001:3000`).
-
-## GitHub (pierwsze wypchnięcie)
-
-Po inicjalizacji repozytorium i pierwszym commicie:
-
-```powershell
-git branch -M main
-git remote add origin https://github.com/<twoj-login>/<nazwa-repo>.git
-git push -u origin main
-```
-
